@@ -54,6 +54,4 @@ public class GuiSrt extends JFrame {
         panel.add(buttonOpen);
         getContentPane().add(panel);
     }
-
-
 }
