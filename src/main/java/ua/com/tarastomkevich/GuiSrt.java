@@ -18,13 +18,13 @@ public class GuiSrt extends JFrame {
     }
 
     private void initFrame() {
-        setSize(new Dimension(600, 110));
+        setSize(new Dimension(470, 80));
         setTitle("Subtitle Extractor");
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("Скористайтесь кнопкою Open та відкрийте один файл субтитрів.Вивід буде здійснений у консоль.");
+        JLabel label = new JLabel("Скористайтесь кнопкою Open та відкрийте один файл субтитрів.");
         panel.add(label);
         JButton buttonOpen = new JButton("Open");
         buttonOpen.addActionListener(new ActionListener() {
@@ -44,8 +44,11 @@ public class GuiSrt extends JFrame {
                     } else {
                         try {
                             SimpleSrt.pathFileSrt = fileChooser.getSelectedFile().getCanonicalPath();
-                            newNameFile = fileChooser.getCurrentDirectory() + "\\new" + fileChooser.getSelectedFile().getName();
+                            String tempNewNameFile  = fileChooser.getCurrentDirectory() + "\\new" + fileChooser.getSelectedFile().getName();
+                            newNameFile = tempNewNameFile.replaceFirst(".srt", ".txt");
                             SimpleSrt.extractSrt();
+                            JOptionPane.showMessageDialog(panel, new String[] {"Успішно створено новий текстовий файл, ",
+                                    "у вказаній папці з субтитрами"}, "УВАГА!" , JOptionPane.INFORMATION_MESSAGE);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
